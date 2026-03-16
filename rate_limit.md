@@ -7,6 +7,7 @@
   const helmet = require('helmet');
 
   const app = express();
+  
   const corsOptions = {
     origin: 'http://example.com',
     credentials: true,
@@ -48,7 +49,7 @@
 
 
   // helmet: Disable the Content-Security-Policy and X-Download-Options headers
-  
+
     app.use(
       helmet({
         contentSecurityPolicy: false,
