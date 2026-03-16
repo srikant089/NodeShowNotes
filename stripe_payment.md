@@ -1,9 +1,9 @@
 // controllers/stripePayment.js
 
-  const stripe = require("../config/stripe");
 
   // Create Customer (User Account)
-
+  
+    const stripe = require("../config/stripe");
     exports.createPaymentIntent = async (req, res) => {
       try {
         const customer = await stripe.customers.create({
@@ -148,7 +148,7 @@
 
 
   //webhook index.js
-  
+
     app.post('/webhook', express.raw({type: 'application/json'}), (req, res) => {
 
     const event = stripe.webhooks.constructEvent(
