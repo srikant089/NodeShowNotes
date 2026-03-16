@@ -1,13 +1,17 @@
 // index.js
 
   const express = require('express');
+
   const cors = require('cors')
+  
   const rateLimit  = require('express-rate-limit');
+  
   const slowDown  = require('express-slow-down');
+  
   const helmet = require('helmet');
 
   const app = express();
-  
+
   const corsOptions = {
     origin: 'http://example.com',
     credentials: true,
