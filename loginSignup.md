@@ -3,8 +3,8 @@
 	require('dotenv').config();
 	const express = require('express');
 	const cors = require('cors');
-	const mongoose = require('mongoose');
 	const cookieParser = require('cookie-parser');
+	const dbConnect = require('./config/dbConnect');
 
 	const app = express();
 	const PORT = process.env.PORT || 8000;	
@@ -22,15 +22,7 @@
 		exposedHeaders:"Authorization"
 	}
 
-	app.use(cors(corsOptions));
-
-	// MONGOOSE CONNECION
-
-		mongoose.connect(process.env.MONGO_DB_URL).then( db=>{
-			console.log("MongoDb is connected Successfully.");
-		}).catch(e=> {
-			console.log("MongoDb error", e);	
-		})
+	app.use(cors(corsOptions));	
 
 	app.get("/test", (req, res) => {
 		res.sed({message:"welcome, its workring"})
@@ -47,8 +39,23 @@
 
 
 	app.listen(PORT,()=>{
+		dbConnect();
 		console.log("server is runing at PORT=>", PORT);
 	})
+
+//backend/config/dbConnection.js
+	const { default: mongoose } = require("mongoose")
+	const dbConnect = async() => {
+		try {
+			const connect = await mongoose.connect(process.env.MONGO_DB);
+			console.log(`Database connected Successfully: ${connect.connection.host},${connect.connection.name}`);
+		} catch (error) {
+			console.log('Database error', error);
+			process.exit(1)
+		}    
+	}
+
+	module.exports = dbConnect;
 
 
 //backend/routers/auth.router.js
