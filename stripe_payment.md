@@ -2,7 +2,7 @@
 
 
   // Create Customer (User Account)
-  
+
     const stripe = require("../config/stripe");
     exports.createPaymentIntent = async (req, res) => {
       try {
@@ -95,36 +95,36 @@
 
 
 
-//Create Supplier (Stripe Connect Account)
+  // Create Supplier (Stripe Connect Account)
 
-  exports.accountCreate = async (req,res)=>{
-    try {
-      const account = await stripe.accounts.create({
-        type: "express",
-        country: "US",
-        email: req.body.email,
-        capabilities: {
-          card_payments: { requested: true },
-          transfers: { requested: true }
-        }
-      });
+    exports.accountCreate = async (req,res)=>{
+      try {
+        const account = await stripe.accounts.create({
+          type: "express",
+          country: "US",
+          email: req.body.email,
+          capabilities: {
+            card_payments: { requested: true },
+            transfers: { requested: true }
+          }
+        });
 
-      const accountLink = await stripe.accountLinks.create({
-        account: account.id,
-        refresh_url: "https://yourapp.com/reauth",
-        return_url: "https://yourapp.com/success",
-        type: "account_onboarding",
-      });
+        const accountLink = await stripe.accountLinks.create({
+          account: account.id,
+          refresh_url: "https://yourapp.com/reauth",
+          return_url: "https://yourapp.com/success",
+          type: "account_onboarding",
+        });
 
-      res.json({
-        accountId: account.id,
-        onboardingUrl: accountLink.url
-      });
+        res.json({
+          accountId: account.id,
+          onboardingUrl: accountLink.url
+        });
 
-    } catch (err) {
-      res.status(500).send(err.message);
+      } catch (err) {
+        res.status(500).send(err.message);
+      }
     }
-  }
 
   // transfersMoney
 
