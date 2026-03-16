@@ -1,20 +1,3 @@
-project/
-│
-├── validators/
-│   ├── user.validator.js
-│   ├── auth.validator.js
-│
-├── middleware/
-│   └── validate.js
-│
-├── routes/
-│   └── user.routes.js
-│
-├── controllers/
-│   └── user.controller.js
-│
-└── app.js
-
 // index.js
 
     const express = require('express');
