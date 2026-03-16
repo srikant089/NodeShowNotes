@@ -7,14 +7,17 @@
   const rateLimit  = require('express-rate-limit');
   
   const slowDown  = require('express-slow-down');
-  
+
   const helmet = require('helmet');
 
   const app = express();
 
   const corsOptions = {
+
     origin: 'http://example.com',
+
     credentials: true,
+    
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
   }
 
