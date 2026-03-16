@@ -26,6 +26,7 @@
 
 
 // validators/user.validator.js
+
     const { checkSchema } = require('express-validator');
     exports.createUserSchema = checkSchema({
 	    username: {
@@ -94,6 +95,7 @@
 
 
 // middleware/validate.js
+
     const { validationResult } = require('express-validator');
     const validate = (validations) => {
 	    return async (req, res, next) => {
@@ -118,6 +120,7 @@
 
 
 // controllers/user.controller.js
+
     exports.createUser = async (req, res) => {
       const { name, email, password } = req.body;
 
