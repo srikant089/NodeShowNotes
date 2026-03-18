@@ -16,7 +16,7 @@
 		console.log("server is runing at PORT=>", PORT);
 	})
 
-// config/dbConnect
+// config/dbConnect.js
 
     const mongoose = require("mongoose");
     async function dbConnect() {
