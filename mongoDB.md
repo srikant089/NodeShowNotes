@@ -158,9 +158,8 @@
 
 // Aggregation Framewrok (filtering/match, grouping, sorting, reshaping, and summarizing via pipeline)
 
-   // ($match, $group, $project, $sort, $limit, $unwind, $lookup, $addFields, $count, $skip)
-
-    Example: db.collection.aggregate([
+    exp: ($match, $group, $project, $sort, $limit, $unwind, $lookup, $addFields, $count, $skip)
+    db.collection.aggregate([
         {
             $group: {
                 _id:"$maker", //field name
