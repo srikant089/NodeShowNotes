@@ -1,6 +1,6 @@
 // MongoDB Models
-    //User.Model.js
 
+    //User.Model.js
         import mongoose from "mongoose";
         const userSchema = new mongoose.Schema({
         name: String,
@@ -82,7 +82,7 @@
         export default mongoose.model("Order", orderSchema);
 
     // Cart.Model.js
-    
+
         const cartSchema = new mongoose.Schema({
         user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
         items: [
