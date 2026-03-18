@@ -29,15 +29,18 @@
 	});
 
 
-	// ROUTER IMPORT
+	// Auth Middleware role based
+    const authMiddleware = require('./middlewares/authMiddleware');
+
+    // ROUTER IMPORT
 	const authRouter = require('./routes/auth.router');
 	const userRouter = require('./routes/user.router');
 	const adminRouter = require('./routes/admin.router');
 
 	// ROUTERS
 	app.use("/api/auth", authRouter);
-	app.use("/api/user", userRouter);
-	app.use("/api/admin", adminRouter);
+	app.use("/api/user", authMiddleware(['USER']), userRouter);
+	app.use("/api/admin", authMiddleware(['ADMIN']), adminRouter);
 
 
 	app.listen(PORT,()=>{
@@ -99,9 +102,7 @@
 
 	} = require('../controllers/user.controller');
 
-	const authMiddleware = require('../middleware/auth.middleware')
-
-	router.get('/profile', authMiddleware(['USER']), profile);
+	router.get('/', profile);
 
 	module.exports = router;
 
@@ -117,11 +118,9 @@
 	    users
 	} = require('../controllers/admin/user.controller');
 
-	const authMiddleware = require('../middleware/auth.middleware')
+	router.get('/users', users);
 
-	router.get('/users', authMiddleware(['ADMIN']), users);
-
-	router.get('/profile', authMiddleware(['ADMIN']), adminProfile);
+	router.get('/', adminProfile);
 
 	module.exports = router;
 
@@ -132,7 +131,7 @@
 	require('dotenv').config();
 	const jwt = require('jsonwebtoken');
 
-	// USER, ADMIN
+	// Role:[USER, ADMIN]
 	const authMiddleware = (roles=[]) => { return (req, res, next) => {
 		try {
 			
