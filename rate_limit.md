@@ -24,8 +24,7 @@
   })
 
   // Apply the rate limiting middleware to all requests
-  app.use(limiter)
-
+  app.use(limiter);
 
   //site go slow dwon (express-slow-down')
   const apiLimiter = slowDown({
@@ -38,7 +37,7 @@
   app.use(apiLimiter)
 
   // Apply the delay middleware to API calls only
-   app.use('/api', apiLimiter)
+  app.use('/api', apiLimiter)
 
 
   // helmet: Disable the Content-Security-Policy and X-Download-Options headers
